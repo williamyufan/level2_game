@@ -57,7 +57,8 @@ public class RaceGamePanel extends JPanel implements KeyListener, ActionListener
 		
 	}
 	void updateEndState() {
-		
+	
+	JOptionPane.showMessageDialog(this, "Your Time is:" + " " +timeCounter + "      "+"Be better next time");
 	}
 	void drawMenuState(Graphics g) {
 		if (gotImage) {

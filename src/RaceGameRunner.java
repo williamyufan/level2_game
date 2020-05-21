@@ -2,8 +2,8 @@ import javax.swing.JFrame;
 
 public class RaceGameRunner {
 	JFrame frame;
-	public static final int WIDTH = 1500;
-	public static final int HEIGHT = 600;
+	public static final int WIDTH = 1600;
+	public static final int HEIGHT = 800;
 	RaceGamePanel panel;
 
 	public static void main(String[] args) {

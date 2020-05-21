@@ -25,10 +25,19 @@ public class RaceCar extends GameObjectforRaceGame{
 		super.update();
 		
 		if(x>=1500) {
+		if(counter<91) {
 			x=0;
 			counter+=5;
 			ObjectManager.createObstacles(counter);
 		}
+		else if(counter>90) {
+			x=0;
+			counter+=0;
+			ObjectManager.createObstacles(counter);
+			
+		}
+		}
+		
 	}
 	void draw(Graphics g) {
 		if (gotImage) {
