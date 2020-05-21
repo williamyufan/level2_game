@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
@@ -22,18 +24,23 @@ public class RaceGamePanel extends JPanel implements KeyListener, ActionListener
 	Font instructionsfont;  
 	Font gameoverfont;
 	Timer frameDraw;
+	Timer gametimer;
+	long timeCounter=0;
+	RaceCar racecar=new RaceCar(260, 200, 100, 100);
+	ObjectManager ob=new ObjectManager();
 	public static BufferedImage image;
 	public static boolean needImage = true;
 	public static boolean gotImage = false;
 	RaceGamePanel() {
-		titlefont = new Font("Arial", Font.PLAIN, 38);
+		titlefont = new Font("Arial", Font.PLAIN, 28);
 		startfont = new Font("Arial", Font.PLAIN, 28);
 		instructionsfont = new Font("Arial", Font.PLAIN, 18);
 		gameoverfont = new Font("Arial", Font.PLAIN, 100);
 		frameDraw = new Timer(1000/60, this);
 		frameDraw.start();
+		gametimer=new Timer(1000, this);
 		if (needImage) {
-		    loadImage ("");
+		    loadImage ("GTAV.jpg");
 		}
 		
 	}
@@ -42,6 +49,11 @@ public class RaceGamePanel extends JPanel implements KeyListener, ActionListener
 		
 	}
 	void updateGameState() {
+		if(racecar.isActive==false) {
+			currentState=END;
+		}
+		racecar.update();
+		ob.update();
 		
 	}
 	void updateEndState() {
@@ -57,18 +69,21 @@ public class RaceGamePanel extends JPanel implements KeyListener, ActionListener
 		
 		g.setFont(titlefont);
 		g.setColor(Color.WHITE);
-		g.drawString("Ganster Training Auto V (aka GTA V)", 490, 438);
+		g.drawString("Nothing like GTA except you can race", 490, 438);
 		g.setFont(startfont);
 		g.setColor(Color.WHITE);
 		g.drawString("Press ENTER to Start", 1200, 300);
 		g.setFont(instructionsfont);
 		g.setColor(Color.WHITE);
 		g.drawString("Press SPACE (it is the longest key on a keboard) for Instructions", 80, 500);
-		
 	}
 	void drawGameState(Graphics g) {
 		g.setColor(Color.DARK_GRAY);
 		g.fillRect(0, 0, RaceGameRunner.WIDTH, RaceGameRunner.HEIGHT);
+		racecar.draw(g);
+		g.setColor(Color.BLUE);
+		g.drawString("timer:"+timeCounter, 100, 100);
+		ob.draw(g);
 	}
 	void drawEndState(Graphics g) {
 		g.setColor(Color.BLACK);
@@ -77,7 +92,7 @@ public class RaceGamePanel extends JPanel implements KeyListener, ActionListener
 		g.setColor(Color.WHITE);
 		g.drawString("<[$]{GG}[$]>", 700, 300);
 		
-	}
+}
 	public void paintComponent(Graphics g) {
 		if (currentState == MENU) {
 			drawMenuState(g);
@@ -99,10 +114,12 @@ public class RaceGamePanel extends JPanel implements KeyListener, ActionListener
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 			if (currentState == END) {
 				currentState = MENU;
+				racecar=new RaceCar(600, 0, 100, 100);
+				
 			} else {
 				currentState++;
 				if(currentState==GAME) {
-					
+					gametimer.start();
 				}
 				else if(currentState==END) {
 					
@@ -111,10 +128,18 @@ public class RaceGamePanel extends JPanel implements KeyListener, ActionListener
 		}
 		else if(e.getKeyCode()==KeyEvent.VK_SPACE) {
 			if(currentState==MENU) {
-				JOptionPane.showMessageDialog(this, "In this game,you will drive a car.\n You will have to avoid obstacles when you are in conrol of that car. \n You can potentially never have to quit the game because as long as you don't crash into one of the obstacles, you can keep going. \n However, if you do crash into one of the obstacles, whether its at 1 second or at 100 minutes, the game will stop and go to the end. \n Your goal is to try to stay on the road for as long as possible. \n i.e. Try to get to 10 minutes if your best is 9 minutes. \n \n Controls: You can only go left and right. \n Left is A \n Right is D \n \n Have fun!");
+				JOptionPane.showMessageDialog(this, "In this game,you will drive a car.\n You will have to avoid obstacles when you are in conrol of that car. \n You can potentially never have to quit the game because as long as you don't crash into one of the obstacles, you can keep going. \n However, if you do crash into one of the obstacles, whether its at 1 second or at 100 minutes, the game will stop and go to the end. \n Your goal is to try to stay on the road for as long as possible. \n i.e. Try to get to 10 minutes if your best is 9 minutes. \n \n Controls: You can only go left and right (But on the screen, it is actually up or down). \n Left is W or the up arrow key (You can use either) \n Right is S or the down arraw key (You can use either) \n \n Have fun!");
 			}
+		}		
+		
+		else if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode()==KeyEvent.VK_W) {
+			racecar.up();
+		}
+		else if (e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode()==KeyEvent.VK_S){
+			racecar.down();
 		}
 	}
+		
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
@@ -123,6 +148,12 @@ public class RaceGamePanel extends JPanel implements KeyListener, ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		if(e.getSource()==gametimer) {
+			timeCounter++;
+		}
+		else {
+			
+		}
 		if (currentState == MENU) {
 			updateMenuState();
 		} else if (currentState == GAME) {
@@ -131,7 +162,7 @@ public class RaceGamePanel extends JPanel implements KeyListener, ActionListener
 			updateEndState();
 		}
 		repaint();
-	
+		
 	}
 	void loadImage(String imageFile) {
 	    if (needImage) {
