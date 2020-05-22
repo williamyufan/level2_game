@@ -24,7 +24,7 @@ public class RaceCar extends GameObjectforRaceGame{
 		x+=3;
 		super.update();
 		
-		if(x>=1500) {
+		if(x>=1600) {
 		if(counter<91) {
 			x=0;
 			counter+=5;

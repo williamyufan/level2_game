@@ -14,10 +14,10 @@ public class ObstacleforRaceCar extends GameObjectforRaceGame {
 	ObstacleforRaceCar(int x, int y) {
 		super(x, y, 500, 500);
 		// TODO Auto-generated constructor stub
-		createobstacle();
+		createobstacle(null);
 			}
-	public void createobstacle() {
-		int level = random.nextInt(15);
+	public void createobstacle(Graphics g) {
+		int level = random.nextInt(11);
 		
 		if (needImage) {
 			if (level == 0) {
@@ -56,54 +56,37 @@ public class ObstacleforRaceCar extends GameObjectforRaceGame {
 
 		
 	}
+
 	if (level == 6) {
-		
-			loadImage("seven.png");
-	
-		
-	}
-	if (level == 7) {
 
 			loadImage("eight.png");
 
 
 	}
-	if (level == 8) {
-
-			loadImage("nine.png");
 	
-	
-	}
-	if (level == 9) {
-
-			loadImage("ten.png");
 	
 
 	}
-	if (level == 10) {
+	if (level == 7) {
 
 			loadImage("twelve.png");
 
 
 	}
-	if (level == 11) {
-	
-			loadImage("thirteen.png");
 
-	}
-	if (level == 12) {
+	if (level == 8) {
 
 			loadImage("fourteen.png");
 
 
 	}
-	if (level == 13) {
+	if (level == 9) {
 
 			loadImage("fiveteen.png");
 	
 
 	}
-	if (level == 14) {
+	if (level == 10) {
 
 			loadImage("sixteen.png");
 	
@@ -112,7 +95,7 @@ public class ObstacleforRaceCar extends GameObjectforRaceGame {
 	width = image.getWidth();
 	height = image.getHeight();
 		}
-}
+
 	void draw(Graphics g) {
 		if (gotImage) {
 			g.drawImage(image, x, y, image.getWidth(), image.getHeight(), null);

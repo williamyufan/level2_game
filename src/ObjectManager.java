@@ -4,6 +4,7 @@ import java.util.Random;
 
 public class ObjectManager {
 	static ArrayList<ObstacleforRaceCar> obstacles = new ArrayList<ObstacleforRaceCar>();
+	RaceCar car=new RaceCar(260, 200, 100, 100);
 
 	ObjectManager() {
 
@@ -24,6 +25,8 @@ public class ObjectManager {
 		for (int i = 0; i < obstacles.size(); i++) {
 			obstacles.get(i).update();
 		}
+		car.update();
+		checkCollision();
 	}
 
 	public void draw(Graphics g) {
@@ -38,12 +41,12 @@ public class ObjectManager {
 			int u;
 			int o;
 			while(whele) {
-				u=new Random().nextInt(1000)+80;
-				o=new Random().nextInt(480);
+				u=new Random().nextInt(1450)+80;
+				o=new Random().nextInt(660);
 			for (int i = 0; i < obstacles.size(); i++) {
 				ObstacleforRaceCar obs=obstacles.get(i);
-				if(obs.x>u-50&&u-50<obs.x+obs.width) {
-					if(obs.y>o-50&&o-50<obs.y+obs.height) {
+				if(obs.x>u-100&&u-100<obs.x+obs.width) {
+					if(obs.y>o-100&&o-100<obs.y+obs.height) {
 					
 						break;
 				
@@ -57,4 +60,15 @@ public class ObjectManager {
 			
 			return position;
 	}
+
+public void checkCollision() {
+	for (ObstacleforRaceCar obstacle : obstacles) {
+		if (car.collisionBox.intersects(obstacle.collisionBox)) {
+			car.isActive = false;
+			
+			break;
+		}
+			}
+		
+}
 }
