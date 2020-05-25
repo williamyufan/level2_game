@@ -61,14 +61,14 @@ public class ObjectManager {
 			return position;
 	}
 
-public void checkCollision() {
-	for (ObstacleforRaceCar obstacle : obstacles) {
-		if (car.collisionBox.intersects(obstacle.collisionBox)) {
-			car.isActive = false;
-			
-			break;
-		}
+	void checkCollision() {
+		for (ObstacleforRaceCar obstacles : obstacles) {
+			if (car.collisionBox.intersects(obstacles.collisionBox)) {
+				car.isActive = false;
+				
+				break;
 			}
-		
-}
+		}
+	}
+
 }
