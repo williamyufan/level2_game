@@ -50,11 +50,12 @@ public class RaceGamePanel extends JPanel implements KeyListener, ActionListener
 		
 	}
 	void updateGameState() {
+		ob.update();
 		if(racecar.isActive==false) {
 			currentState=END;
 		}
 		racecar.update();
-		ob.update();
+		
 		
 	}
 	void updateEndState() {

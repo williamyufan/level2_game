@@ -17,7 +17,7 @@ public class GameObjectforRaceGame {
 	}
 	public void update() {
 		// TODO Auto-generated method stub
-		collisionBox.setBounds(3, 3, 3, 3);
+		collisionBox.setBounds(x, y, width, height);
 	}
 
 }

@@ -39,13 +39,16 @@ public class ObstacleforRaceCar extends GameObjectforRaceGame {
 	if (level == 2) {
 		
 			loadImage("three.png");
-			collisionboxes.add(new Rectangle(x+80, y+30, width-95, height-80));
+			collisionboxes.add(new Rectangle(x+76, y+38, width-97, height-52));
+			collisionboxes.add(new Rectangle(x+18, y+30, width-40, height-93));
 		}
 	
 	if (level == 3) {
 
 			loadImage("four.png");
-	
+			collisionboxes.add(new Rectangle(x+20, y+18, width-95, height-80));
+			collisionboxes.add(new Rectangle(x+23, y+40, width-83, height-91));
+			collisionboxes.add(new Rectangle(x+40, y+45, width-90, height-76));
 		
 	}
 	if (level == 4) {
@@ -57,8 +60,8 @@ public class ObstacleforRaceCar extends GameObjectforRaceGame {
 	if (level == 5) {
 	
 			loadImage("six.png");
-		
-		
+			collisionboxes.add(new Rectangle(x+30, y+20, width-90, height-96));
+			collisionboxes.add(new Rectangle(x+40, y+23, width-95, height-90));
 	}
 
 	if (level == 6) {
@@ -89,7 +92,7 @@ public class ObstacleforRaceCar extends GameObjectforRaceGame {
 	if (level == 9) {
 
 			loadImage("fiveteen.png");
-	
+			collisionboxes.add(new Rectangle(x+54, y+35, width-94, height-91));
 
 	}
 	if (level == 10) {

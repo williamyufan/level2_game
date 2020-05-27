@@ -7,7 +7,7 @@ public class ObjectManager {
 	RaceCar car=new RaceCar(260, 200, 100, 100);
 
 	ObjectManager() {
-
+	
 		createObstacles(0);
 
 	}
@@ -63,11 +63,14 @@ public class ObjectManager {
 
 	void checkCollision() {
 		for (ObstacleforRaceCar obstacles : obstacles) {
-			if (car.collisionBox.intersects(obstacles.collisionBox)) {
+		for (int i = 0; i <obstacles.collisionboxes.size(); i++) {
+			
+	if (car.collisionBox.intersects(obstacles.collisionboxes.get(i))) {
 				car.isActive = false;
 				
 				break;
 			}
+		}
 		}
 	}
 
