@@ -13,7 +13,7 @@ public class ObstacleforRaceCar extends GameObjectforRaceGame {
 	public boolean needImage = true;
 	public boolean gotImage = false;
 	ArrayList<Rectangle> collisionboxes=new ArrayList<Rectangle>();
-
+	
 	ObstacleforRaceCar(int x, int y) {
 		super(x, y, 500, 500);
 		// TODO Auto-generated constructor stub

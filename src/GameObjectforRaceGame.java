@@ -5,7 +5,7 @@ public class GameObjectforRaceGame {
 	int y;
 	int width;
 	int height;
-	int speed=0;
+	int speed=1;
 	boolean isActive=true;
 	Rectangle collisionBox;
 	GameObjectforRaceGame(int x, int y, int width, int height){

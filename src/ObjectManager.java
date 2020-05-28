@@ -33,6 +33,7 @@ public class ObjectManager {
 		for (int i = 0; i < obstacles.size(); i++) {
 			obstacles.get(i).draw(g);
 		}
+		car.draw(g);
 	}
 
 	public static int[] getnewobstacleposition(){
@@ -41,7 +42,7 @@ public class ObjectManager {
 			int u;
 			int o;
 			while(whele) {
-				u=new Random().nextInt(1450)+80;
+				u=new Random().nextInt(1450)+150;
 				o=new Random().nextInt(660);
 			for (int i = 0; i < obstacles.size(); i++) {
 				ObstacleforRaceCar obs=obstacles.get(i);
