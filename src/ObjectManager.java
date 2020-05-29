@@ -5,13 +5,15 @@ import java.util.Random;
 
 public class ObjectManager {
 	static ArrayList<ObstacleforRaceCar> obstacles = new ArrayList<ObstacleforRaceCar>();
-	RaceCar car = new RaceCar(260, 200, 100, 100);
+	RaceCar car = new RaceCar(10, 260, 100, 100);
 	static ArrayList<Powerups> p = new ArrayList<Powerups>();
-	static ArrayList<Powerdowns> d=new ArrayList<Powerdowns>();
+	static ArrayList<Powerdowns> d = new ArrayList<Powerdowns>();
 
 	ObjectManager() {
 
 		createObstacles(0);
+		createpowerups(0);
+		createpowerdowns(0);
 
 	}
 
@@ -23,15 +25,25 @@ public class ObjectManager {
 
 		}
 	}
-	public void createpowerups(int cot) {
+
+	public static void createpowerups(int cot) {
+		p.clear();
 		for (int i = 0; i < cot; i++) {
 			int[] position = getnewpowerupsposition();
-			obstacles.add(new ObstacleforRaceCar(position[0], position[1]));
+			p.add(new Powerups(position[0], position[1], 15, 15));
+
+		}
+	}
+	public static void createpowerdowns(int co) {
+		d.clear();
+		for (int i = 0; i < co; i++) {
+			int[] position = getnewpowerdowns();
+			d.add(new Powerdowns(position[0], position[1], 15, 15));
 
 		}
 	}
 
-	private int[] getnewpowerupsposition() {
+	public static int[] getnewpowerupsposition() {
 		// TODO Auto-generated method stub
 		int[] position = new int[2];
 		boolean yy = true;
@@ -40,8 +52,8 @@ public class ObjectManager {
 		while (yy) {
 			u = new Random().nextInt(1450) + 150;
 			o = new Random().nextInt(660);
-			for (int i = 0; i < obstacles.size(); i++) {
-				ObstacleforRaceCar obs = obstacles.get(i);
+			for (int i = 0; i < p.size(); i++) {
+				Powerups obs = p.get(i);
 				if (obs.x > u - 100 && u - 100 < obs.x + obs.width) {
 					if (obs.y > o - 100 && o - 100 < obs.y + obs.height) {
 
@@ -50,7 +62,33 @@ public class ObjectManager {
 					}
 				}
 			}
-			whele = false;
+			yy = false;
+			position[0] = u;
+			position[1] = o;
+		}
+
+		return position;
+	}
+	public static int[] getnewpowerdowns() {
+		// TODO Auto-generated method stub
+		int[] position = new int[2];
+		boolean f = true;
+		int u;
+		int o;
+		while (f) {
+			u = new Random().nextInt(1450) + 150;
+			o = new Random().nextInt(660);
+			for (int i = 0; i < d.size(); i++) {
+				Powerdowns obs = d.get(i);
+				if (obs.x > u - 100 && u - 100 < obs.x + obs.width) {
+					if (obs.y > o - 100 && o - 100 < obs.y + obs.height) {
+
+						break;
+
+					}
+				}
+			}
+			f = false;
 			position[0] = u;
 			position[1] = o;
 		}
@@ -80,6 +118,7 @@ public class ObjectManager {
 		car.draw(g);
 		for (int i = 0; i < p.size(); i++) {
 			p.get(i).draw(g);
+		
 		}
 		for (int i = 0; i < d.size(); i++) {
 			d.get(i).draw(g);
@@ -141,23 +180,22 @@ public class ObjectManager {
 				}
 			}
 		}
-		for(Powerups p : p) {
-			for (int i = 0; i < p.powerups.size(); i++) {
-			if(car.collisionBox.intersects(p.powerups.get(i))) {
-				p.isActive=false;
-				car.speed-=2;
+		for (Powerups p : p) {
+				if (car.collisionBox.intersects(p.collisionBox)) {
+					p.isActive = false;
+					car.speed -= 1;
+				}
 			}
-			}
+
 		
+		for (Powerdowns d : d) {
+			
+				if (car.collisionBox.intersects(d.collisionBox)) {
+					d.isActive = false;
+					car.speed += 3;
 				}
-		for(Powerdowns d : d) {
-			for (int i = 0; i < d.powerd.size(); i++) {
-			if(car.collisionBox.intersects(d.powerd.get(i))) {
-				d.isActive=false;
-				car.speed+=5;
 			}
-				}
 		}
 	}
 
-}
+
