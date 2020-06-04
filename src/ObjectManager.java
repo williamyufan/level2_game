@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class ObjectManager {
 	static ArrayList<ObstacleforRaceCar> obstacles = new ArrayList<ObstacleforRaceCar>();
-	RaceCar car = new RaceCar(10, 260, 100, 100);
+	RaceCar car = new RaceCar(10, 300, 50, 23);
 	static ArrayList<Powerups> p = new ArrayList<Powerups>();
 	static ArrayList<Powerdowns> d = new ArrayList<Powerdowns>();
 

@@ -9,18 +9,19 @@ public class RaceCar extends GameObjectforRaceGame {
 	public static BufferedImage image;
 	public static boolean needImage = true;
 	public static boolean gotImage = false;
-	int counter = 0;
+	static int counter = 0;
 	Random ran = new Random();
-	Random r=new Random();
-	int f=0;
-	int p=0;
-	int q=0;
-	int a=0;
+	Random r = new Random();
+	static int f = 0;
+	int p = 0;
+	int q = 0;
+	static int a = 0;
+
 	RaceCar(int x, int y, int width, int height) {
 		super(x, y, width, height);
 
 		if (needImage) {
-			loadImage("i.png");
+			loadImage("racecar.png");
 
 		}
 
@@ -28,8 +29,8 @@ public class RaceCar extends GameObjectforRaceGame {
 
 	public void update() {
 		int u = ran.nextInt(2);
-		int h=r.nextInt(2);
-		
+		int h = r.nextInt(2);
+
 		x += speed;
 		super.update();
 
@@ -39,32 +40,29 @@ public class RaceCar extends GameObjectforRaceGame {
 
 				counter += 5;
 				ObjectManager.createObstacles(counter);
-				speed += 1;
-				
-			}
-			else if (counter > 90) {
-				x = 0;
 				speed += 2;
 
+			} else if (counter > 90) {
+				x = 0;
+				speed += 3;
+
 			}
-			 if (u == 0) {
-					f += 2;
-					ObjectManager.createpowerups(f);
-				
-				}
-				else if (u == 1) {
-					p += 3;
-					ObjectManager.createpowerups(p);
-				
-				}
-			 if(h==0) {
-				 a+=2;
-				 ObjectManager.createpowerdowns(a);
-			 }
-			 else if(h==1) {
-				 q+=3;
-				 ObjectManager.createpowerdowns(q);
-			 }
+			if (u == 0) {
+				f += 2;
+				ObjectManager.createpowerups(f);
+
+			} else if (u == 1) {
+				f += 3;
+				ObjectManager.createpowerups(p);
+
+			}
+			if (h == 0) {
+				a += 2;
+				ObjectManager.createpowerdowns(a);
+			} else if (h == 1) {
+				a += 3;
+				ObjectManager.createpowerdowns(q);
+			}
 		}
 
 	}
@@ -76,6 +74,8 @@ public class RaceCar extends GameObjectforRaceGame {
 			g.setColor(Color.BLUE);
 			g.fillRect(x, y, width, height);
 		}
+		
+		
 	}
 
 	public void up() {

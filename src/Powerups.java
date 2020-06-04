@@ -18,7 +18,7 @@ public class Powerups extends GameObjectforRaceGame {
 
 
 			
-					g.setColor(Color.YELLOW);
+					g.setColor(Color.GREEN);
 					g.fillRect(x, y, 15, 15);
 				}
 

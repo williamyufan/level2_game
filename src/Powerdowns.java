@@ -16,7 +16,7 @@ public class Powerdowns extends GameObjectforRaceGame {
 	public void draw(Graphics g) {
 
 	
-					g.setColor(Color.BLUE);
+					g.setColor(Color.RED);
 					g.fillRect(x,y, 15, 15);
 
 	
