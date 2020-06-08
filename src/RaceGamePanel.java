@@ -144,13 +144,14 @@ public class RaceGamePanel extends JPanel implements KeyListener, ActionListener
 		
 		else if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode()==KeyEvent.VK_W) {
 			ob.car.up();
-			if(ob.car.y>=0) {
-				
+			if(ob.car.y<=0) {
+				ob.car.y=0;
 			}
 		}
 		else if (e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode()==KeyEvent.VK_S){
 			ob.car.down();
-			if(ob.car.y<=800) {
+			if(ob.car.y>=780-23) {
+				ob.car.y=780-23;
 				
 			}
 		}
